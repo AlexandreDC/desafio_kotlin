@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Categorias</title>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Desafio técnico - Java Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.jsp">Início<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="produtos">Produtos</a>
+                            <a class="dropdown-item" href="categorias">Categorias</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-light" role="button" href="requisitos.jsp">Requisitos</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <main id="app">
+            <router-view></router-view>
+        </main>
+
+
+
+
+
+
+
+
+
+        <template id="categoria">
+            <div style="max-height: 100%; max-width: 100%">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Categoria: {{categoria.codigo}}
+                            <router-link class="btn btn-outline-secondary" to="/">Voltar para Listagem</router-link></h1>
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div class="form-group">
+                        <label for="del-nome">Nome</label>
+                        <input type="text" class="form-control" id="del-nome" placeholder="Nome da categoria" v-model="categoria.nome" readonly="readonly" required>
+                    </div>
+                   
+
+                    <router-link class="btn btn-light btn-xs" :to="{name: 'categoria-edit', params: {categoria_codigo: categoria.codigo}}">
+                        Editar
+                    </router-link>
+                    <router-link class="btn btn-danger btn-xs" :to="{name: 'categoria-delete', params: {categoria_codigo: categoria.codigo}}">
+                        Excluir
+                    </router-link>
+
+                </div>
+            </div>
+        </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <template id="lista-categorias">
+
+            <div style="height: 100%; width: 100%">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Listagem de Categorias</h1>
+                        <hr class="my-4">
+                        <p>Estas são as categorias cadastradas, clique no botão abaixo se precisar cadastrar outra</p>
+                        <p class="lead">
+                        <router-link :to="{name: 'nova-categoria'}" class="btn btn-primary btn-lg" role="button">Cadastrar Nova Categoria</router-link>   
+                        </p>
+                    </div>
+                </div>
+                <div class="container-fluid table-responsive">
+
+                    <div class="filters row">
+                        <div class="form-group input-group col-sm-3">
+                            <input placeholder="Procurar" v-model="searchKey" class="form-control" id="search-element" required/>
+                            <span class="input-group-append">
+                                <div class="input-group-text bg-transparent"><i class="fa fa-search fa-lg"></i></div>
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr v-for="categoria in filteredCategorias">
+                                <td>
+                                    <a>
+                                        <router-link :to="{name: 'categoria', params: {categoria_codigo: categoria.codigo}}">{{ categoria.codigo }}</router-link>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a>
+                                        <router-link :to="{name: 'categoria', params: {categoria_codigo: categoria.codigo}}">{{ categoria.nome }}</router-link>
+                                    </a>
+                                </td>
+
+                                <td>                                    
+                        <router-link class="btn btn-light btn-xs" :to="{name: 'categoria-edit', params: {categoria_codigo: categoria.codigo}}">
+                            Editar
+                        </router-link>
+                        <router-link class="btn btn-danger btn-xs" :to="{name: 'categoria-delete', params: {categoria_codigo: categoria.codigo}}">
+                            Excluir
+                        </router-link>
+                        </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>   
+
+            </div>   
+
+        </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <template id="nova-categoria">
+            <div style="max-height: 100%; max-width: 100%">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Nova Categoria   
+                            <router-link class="btn btn-outline-secondary" to="/">Voltar para Listagem</router-link></h1>
+                    </div>
+                </div>
+                <div class="container">
+                    <form @submit="createCategoria" @submit.prevent>
+
+                        <div class="form-group">
+                            <label for="add-nome">Nome</label>
+                            <input type="text" class="form-control" id="add-nome" placeholder="Nome da categoria" v-model="categoria.nome" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+
+
+                    </form>
+                </div>
+            </div>
+        </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <template id="categoria-edit">
+
+
+            <div style="max-height: 100%; max-width: 100%">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Editando Categoria: {{categoria.codigo}}
+                            <router-link class="btn btn-outline-secondary" to="/">Voltar para Listagem</router-link></h1>
+                    </div>
+                </div>
+                <div class="container">
+                    <form @submit="updateCategoria" @submit.prevent>
+
+                        <div class="form-group">
+                            <label for="edt-nome">Nome</label>
+                            <input type="text" class="form-control" id="edt-nome" placeholder="Nome da categoria" v-model="categoria.nome" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+
+
+                    </form>
+                </div>
+            </div>
+        </template>
+
+
+
+
+
+
+
+
+
+        <template id="categoria-delete">
+            <div style="max-height: 100%; max-width: 100%">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Categoria: {{categoria.codigo}}
+                            <router-link class="btn btn-outline-secondary" to="/">Voltar para Listagem</router-link></h1>
+                    </div>
+                </div>
+                <div class="container">
+                    <form @submit="deleteCategoria" @submit.prevent>
+
+                        <div class="form-group">
+                            <label for="del-nome">Nome</label>
+                            <input type="text" class="form-control" id="del-nome" placeholder="Nome da categoria" v-model="categoria.nome" readonly="readonly" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger btn-lg">Confirmar Exclusão</button>
+
+
+                    </form>
+                </div>
+            </div>
+        </template>
+
+        <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+        <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+        <script src="/categorias.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+    </body>
+</html>

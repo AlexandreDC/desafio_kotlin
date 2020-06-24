@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+        <link type="text/css" href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <title>Listagem de Requisitos</title>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Desafio técnico - Java Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Início<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cadastros
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="produtos">Produtos</a>
+                            <a class="dropdown-item" href="categorias">Categorias</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="btn btn-outline-light" role="button" href="requisitos">Requisitos</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Listagem de requisitos</h1>
+                <p class="lead">Esta página além de ajudar na conferência da submissão ela teve um propósito bem importante: ela serviu para praticar o uso de alguns componentes do bootstrap.</p>
+                <hr class="my-4">
+                <p>Cada card representa um requisito, se quiser a legenda clique no botão abaixo</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#legenda">Legenda</a>
+                </p>
+            </div>
+        </div>
+
+
+        <div style="margin:3em;">
+
+
+
+
+
+            <div class="modal fade" id="legenda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titulo">Legenda</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="container-fluid">
+
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card border-secondary mb-3">
+                                            <div class="card-header">Requisito</div>
+                                            <div class="card-body text-secondary">
+                                                <h5 class="card-title">Nova funcionalidade</h5>
+                                                <p class="card-text">Quando você ver um card como este, saiba que tem recurso novo no Projeto</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card border-success mb-3">
+                                            <div class="card-header">Melhoria</div>
+                                            <div class="card-body text-success">
+                                                <h5 class="card-title">Interface</h5>
+                                                <p class="card-text">Quando você ver um card como este, é porque ela representa uma melhoria do projeto</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card border-danger mb-3">
+                                            <div class="card-header">Bug!</div>
+                                            <div class="card-body text-danger">
+                                                <h5 class="card-title">Houston we didn't have a problem!</h5>
+                                                <p class="card-text">Quando você ver um card como este, é porque alguma coisa voltou a funcionar!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="card border-primary mb-3 min-vw-50">
+                                            <div class="card-header">Melhoria</div>
+                                            <div class="card-body text-primary">
+                                                <h5 class="card-title">Projeto</h5>
+                                                <p class="card-text">Quando você ver um card como este, é porque ela representa uma melhoria do projeto</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card border-info mb-3">
+                                    <div class="card-header">Teste</div>
+                                    <div class="card-body text-info">
+                                        <h5 class="card-title">Isto não é um teste!</h5>
+                                        <p class="card-text">Quando você ver um card como este, saiba que um teste foi automatizado</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            <div class="card border-primary mb-3">
+                <div class="card-header">Melhorias no projeto Java Web</div>
+                <div class="card-body text-primary">
+                    <p class="card-text">
+                        <strong>Para</strong> facilitar a manutenção do projeto aumentando a qualidade</p>
+                    <p class="card-text"><strong>Como</strong> um membro do time,</p>
+                    <p class="card-text"><strong>Preciso</strong> que sejam realizadas melhorias no código fonte do projeto
+                        <strong>E</strong> que o sistema continue funcionando corretamente.</p>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário:</p>
+                        Facilitar o entendimento e manutenção (Ex: Refatoração, criação de pacotes, nomes de variáveis, interfaces, etc).
+                    </footer>
+                </div>
+            </div>
+
+
+            <div class="card border-secondary mb-3">
+                <div class="card-header">Permitir o cadastro de categorias</div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">
+                        <strong>Para</strong> efetuar a gestão das categorias de produtos,</p>
+                    <p class="card-text"><strong>Como</strong> um membro do time,</p>
+                    <p class="card-text"><strong>Preciso</strong> que seja possível listar, incluir e alterar categorias pelo sistema.</p>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 1: Listagem de categorias</p>
+                        <strong>Dado</strong> que eu precise visualizar as categorias cadastradas no sistema<p/>
+                        <strong>Quando</strong> eu acessar a listagem de categorias<p/>
+                        <strong>Então</strong> eu quero ver todas as categorias cadastradas.
+                    </footer>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 2: Inclusão de categoria</p>
+                        <strong>Dado</strong> que eu precise cadastrar uma nova categoria no sistema<p/>
+                        <strong>Quando</strong> eu acessar a listagem de categorias<p/>
+                        <strong>Então</strong> eu quero informar um nome de categoria com no máximo 50 caracteres
+                        <strong>e</strong> o sistema permite salvar as informações.
+                    </footer>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 3: Alteração de categoria<p/>
+                        <strong>Dado</strong> que eu precise alterar o nome de uma categoria cadastrada no sistema<p/>
+                        <strong>Quando</strong> eu acessar a listagem de categorias
+                        <strong>e</strong> selecionar uma categoria<p/>
+                        <strong>Então</strong> eu quero alterar o nome da categoria
+                        e o sistema permite salvar as informações.
+                    </footer>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 4: Exclusão da categoria</p>
+
+                        <strong>Dado</strong> que eu precise excluir uma categoria<p/>
+                        <strong>Quando</strong> eu acessar a listagem de categorias
+                        <strong>e</strong> selecionar uma categoria<p/>
+                        <strong>Então</strong> eu quero excluir a categoria
+                        <strong>e</strong> o sistema deve validar
+                        <strong>ou</strong> excluir a categoria caso possível.
+                    </footer>
+                </div>
+            </div>
+
+            <div class="card border-danger mb-3">
+                <div class="card-header">Sistema está permitindo salvar produto sem nome</div>
+                <div class="card-body text-danger">
+                    <h5 class="card-title">Passo a passo:</h5>
+                    <p class="card-text"> Abrir a inclusão de produto, preencher todas as informações menos o nome do produto.</p>
+                    <h5 class="card-title">Incidente:</h5>
+                    <p class="card-text"> Ao salvar, o sistema efetua a inclusão com sucesso e o produto fica sem nome.</p>
+                    <h5 class="card-title">Funcionamento correto:</h5>
+                    <p class="card-text">Não deve permitir salvar produto sem nome, pois, é uma informação obrigatória.</p>
+
+                </div>
+            </div>
+
+
+            <div class="card border-secondary mb-3">
+                <div class="card-header">Integrar o novo cadastro de categorias nos produtos</div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">
+                        <strong>Para</strong> facilitar a gestão de produtos, permitindo que sejam vinculados a novas categorias,</p>
+                    <p class="card-text"><strong>Como</strong> usuário do sistema,</p>
+                    <p class="card-text"><strong>Preciso</strong> que no cadastro de produtos seja possível selecionar as categorias cadastradas.</p>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 1: Incluir produto selecionando uma categoria do cadastro de categorias</p>
+                        <strong>Dado</strong> que eu precise incluir um produto no sistema<p/>
+                        <strong>Quando</strong> abrir a inclusão de produto<p/>
+                        <strong>Então</strong> eu quero que no campo Categoria sejam apresentadas todas as categorias existentes no cadastro de Categorias e o sistema permite salvar as informações.
+                    </footer>
+                    <footer class="blockquote-footer"><p class="card-text">Cenário 2: Alterar produto selecionando uma categoria do cadastro de categorias</p>
+                        <strong>Dado</strong> que eu precise alterar um produto no sistema<p/>
+                        <strong>Quando</strong> abrir a alteração de produto<p/>
+                        <strong>Então</strong> eu quero que no campo Categoria sejam apresentadas todas as categorias existentes no cadastro de Categorias
+                        e o sistema permite salvar as informações.
+
+                    </footer>
+                </div>
+            </div>
+
+            <div class="card border-info mb-3">
+                <div class="card-header">Implementação de Testes Unitários</div>
+                <div class="card-body text-info">
+                    <p class="card-text">
+                        <strong>Para</strong> facilitar a manutenção do projeto aumentando a qualidade e segurança das funcionalidades</p>
+                    <p class="card-text"><strong>Como</strong> um membro do time,</p>
+                    <p class="card-text"><strong>Preciso</strong> que sejam implementados testes automatizados para garantir que quando novas funcionalidades passem a ser implementadas não ocorram falhas no código já existente.</p>
+                </div>
+            </div>
+
+
+            <div class="card border-primary mb-3">
+                <div class="card-header">Implementação de JPA para persistência</div>
+                <div class="card-body text-primary">
+                    <p class="card-text">
+                        <strong>Para</strong> tornar mais fácil e ágil o desenvolvimento de novas funcionalidades no sistema não precisando mais utilizar SQL nativo ao realizar transações com o banco de dados</p>
+                    <p class="card-text"><strong>Como</strong> um membro do time,</p>
+                    <p class="card-text"><strong>Preciso</strong> o projeto passe a utilizar JPA</p>
+                </div>
+            </div>
+
+
+            <div class="card border-success mb-3">
+                <div class="card-header">Melhorias de design nas telas do sistema</div>
+                <div class="card-body text-success">
+                    <p class="card-text">
+                        <strong>Para</strong> melhorar a usabilidade</p>
+                    <p class="card-text"><strong>Como</strong> um usuário do sistema,</p>
+                    <p class="card-text"><strong>Preciso</strong> que sejam realizadas melhorias visuais nas telas do sistema.</p>
+                </div>
+            </div>
+
+
+
+
+
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    </body>
+</html>
