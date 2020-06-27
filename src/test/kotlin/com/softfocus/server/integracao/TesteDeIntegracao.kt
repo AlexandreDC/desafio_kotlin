@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.softfocus.server
+package com.softfocus.server.integracao
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.softfocus.server.api.repository.CategoriaRepository
 import com.softfocus.server.api.repository.ProdutoRepository
 import com.softfocus.server.model.Categoria
 import com.softfocus.server.model.Produto
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -26,13 +25,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.text.SimpleDateFormat
 import java.util.*
 
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 
 
 /**
@@ -223,6 +218,7 @@ internal class TesteDeIntegracao {
 		assertThat(produtoRecuperado.get().descricao).isEqualTo(produtoTestado.descricao)
 		assertThat(produtoRecuperado.get().categoria).isEqualTo(produtoTestado.categoria)
 	}
+
 
 	@Test
 	@Order(7)
