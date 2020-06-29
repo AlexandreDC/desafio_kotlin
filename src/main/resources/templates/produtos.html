@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.jsp">Início<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index">Início<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
                         </div>
                     </li>
                     <li class="nav-item active">
-                        <a class="btn btn-outline-light" role="button" href="requisitos.jsp">Requisitos</a>
+                        <a class="btn btn-outline-light" role="button" href="requisitos">Requisitos</a>
                     </li>
 
 
@@ -63,16 +63,16 @@
                 <div class="container">
 
                     <div class="form-group">
-                        <label for="del-categoria">Categoria</label>
-                        <input type="text" class="form-control" id="del-categoria" placeholder="Nome do produto" v-model="produto.categoria.nome" readonly="readonly" required>
+                        <label for="show-categoria">Categoria</label>
+                        <input type="text" class="form-control" id="show-categoria" placeholder="Nome do produto" v-model="produto.categoria.nome" readonly="readonly" required>
                     </div>
                     <div class="form-group">
-                        <label for="del-nome">Nome</label>
-                        <input type="text" class="form-control" id="del-nome" placeholder="Nome do produto" v-model="produto.nome" readonly="readonly" required>
+                        <label for="show-nome">Nome</label>
+                        <input type="text" class="form-control" id="show-nome" placeholder="Nome do produto" v-model="produto.nome" readonly="readonly" required>
                     </div>
                     <div class="form-group">
-                        <label for="del-descricao">Descrição</label>
-                        <textarea type="text" class="form-control" id="del-descricao" placeholder="Descrição do produto" 
+                        <label for="show-descricao">Descrição</label>
+                        <textarea type="text" class="form-control" id="show-descricao" placeholder="Descrição do produto"
                                   v-model="produto.descricao" readonly="readonly" required></textarea>
                     </div>
 
@@ -209,6 +209,7 @@
                         <div class="form-group">
                             <label for="add-categoria">Categoria</label>
                             <select class="form-control" id="add-categoria" v-model="produto.categoria" required>
+                                <option value="">Escolha uma categoria</option>
                                 <option v-for="categoria in categorias" :value="categoria">{{categoria.nome}}</option>
                             </select>
                         </div>
@@ -262,8 +263,9 @@
 
 
                         <div class="form-group">
-                            <label for="add-categoria">Categoria</label>
-                            <select class="form-control" id="add-categoria" v-model="produto.categoria" required>
+                            <label for="edt-categoria">Categoria</label>
+                            <select class="form-control" id="edt-categoria" v-model="produto.categoria" required>
+                                <option value="" selected>Escolha uma categoria</option>
                                 <option v-for="categoria in categorias" :value="categoria">{{categoria.nome}}</option>
                             </select>
                         </div>

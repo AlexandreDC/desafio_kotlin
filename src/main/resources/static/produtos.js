@@ -167,7 +167,7 @@ var AddProduto = Vue.extend({
     template: '#novo-produto',
 
     data: function () {
-        return {produto: {nome: '', descricao: '', categoria: {}}, categorias: []}
+        return {produto: {nome: '', descricao: '', categoria: ""}, categorias: []}
     },
     methods: {
         createProduto() {
