@@ -5,13 +5,11 @@
  */
 package com.softfocus.server.api.model
 
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import org.hibernate.annotations.NotFound
-import org.hibernate.annotations.NotFoundAction
+
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 
 /**
@@ -32,18 +30,17 @@ data class Produto (
     var codigo: Int = 0,
 
 
-    @Column(length = 200)
-    @get: NotBlank(message = "não pode ser vazio")
+    @get: Size(max = 200, message = "Tamanho do nome não pode exceder 200 caracteres")
+    @get: NotBlank(message = "Nome não pode ser vazio")
     var nome: String = "",
 
-    @Column(length = 4000)
-    @get: NotBlank(message = "não pode ser vazio")
+    @get: Size(max = 4000, message = "Tamanho da descrição não pode exceder 4000 caracteres")
+    @get: NotBlank(message = "Descrição não pode ser vazia")
     var descricao: String = "",
 
     @ManyToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "categoria")
-    @get: NotFound(action = NotFoundAction.EXCEPTION)
-    @get: NotNull(message = "não informada")
+    @get: NotNull(message = "Categoria não informada")
     var categoria: Categoria? = null
 
 

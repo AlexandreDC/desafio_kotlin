@@ -5,8 +5,10 @@
  */
 package com.softfocus.server.api.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 /**
  *
@@ -23,6 +25,13 @@ data class Categoria (
     @Column(name = "codigo")
     val  codigo: Int = 0,
 
+    @get: Size(max = 50, message = "Tamanho do nome não pode exceder 50 caracteres")
     @get: NotBlank(message = "Nome não pode ser vazio")
-    var nome: String = ""
+    var nome: String = "",
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
+    var produtos: List<Produto>? = null
+
+
 )

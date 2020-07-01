@@ -1,8 +1,8 @@
 package com.softfocus.server.api.service
 
-import com.softfocus.server.api.util.APIException
 import com.softfocus.server.api.model.Categoria
 import com.softfocus.server.api.repository.CategoriaRepository
+import com.softfocus.server.api.util.APIException
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -44,6 +44,11 @@ class CategoriaService(private val categoriaRepository: CategoriaRepository) {
         if (!categoriaRepository.existsById(categoriaID)) {
             throw APIException("Categoria não existe : " + categoriaID);
         }
+
+        if (categoriaRepository.findById(categoriaID).get().produtos!!.isNotEmpty()) {
+            throw APIException("Existem produtos vinculados a esta categoria, não será permitido excluir");
+        }
+
         categoriaRepository.deleteById(categoriaID)
     }
 }
