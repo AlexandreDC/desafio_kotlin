@@ -8,8 +8,8 @@ package com.softfocus.server.integracao
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.softfocus.server.api.repository.CategoriaRepository
 import com.softfocus.server.api.repository.ProdutoRepository
-import com.softfocus.server.model.Categoria
-import com.softfocus.server.model.Produto
+import com.softfocus.server.api.model.Categoria
+import com.softfocus.server.api.model.Produto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -204,7 +204,7 @@ internal class TesteDeIntegracao {
 		produtoTestado = listaProdutos[listaProdutos.size - 1]
 		produtoTestado.nome = nomeAleatorio
 		produtoTestado.descricao = descricaoAleatoria
-		produtoTestado.categoria = categoriaRepository.findAll()[0]
+		produtoTestado.categoria = categoriaRepository.findAll().first()
 		mockMvc.perform(put("/api/v1/produtos/" + produtoTestado.codigo.toString())
 				.contentType("application/json")
 				.content(objectMapper.writeValueAsString(produtoTestado)))

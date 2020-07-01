@@ -5,12 +5,12 @@
  */
 package com.softfocus.server.api.repository
 
-import com.softfocus.server.model.Categoria
-import org.springframework.data.jpa.repository.JpaRepository
+import com.softfocus.server.api.model.Categoria
+import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CategoriaRepository : JpaRepository<Categoria, Int> {
+interface CategoriaRepository : CrudRepository<Categoria, Int> {
     fun findByNome(nome: String): List<Categoria>
     fun findCategoriasTeste(): List<Categoria>
 }

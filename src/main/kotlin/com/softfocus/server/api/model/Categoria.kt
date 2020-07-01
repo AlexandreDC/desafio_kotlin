@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.softfocus.server.model
+package com.softfocus.server.api.model
 
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
@@ -20,9 +20,9 @@ import javax.validation.constraints.NotBlank
 data class Categoria (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo", nullable = false)
+    @Column(name = "codigo")
     val  codigo: Int = 0,
 
-    @get: NotBlank
+    @get: NotBlank(message = "Nome não pode ser vazio")
     var nome: String = ""
 )
