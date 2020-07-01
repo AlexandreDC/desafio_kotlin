@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ProdutoRepository : CrudRepository<Produto, Int> {
-    fun findByNome(nome: String): List<Produto>
-    fun findByDescricao(descricao: String): List<Produto>
-    fun findProdutosTeste(): List<Produto>
+    fun findByNome(nome: String): Iterable<Produto>
+    fun findByDescricao(descricao: String): Iterable<Produto>
+    fun findProdutosTeste(): Iterable<Produto>
 }
