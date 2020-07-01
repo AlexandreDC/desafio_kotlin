@@ -6,10 +6,10 @@
 package com.softfocus.server.integracao
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.softfocus.server.api.repository.CategoriaRepository
-import com.softfocus.server.api.repository.ProdutoRepository
 import com.softfocus.server.api.model.Categoria
 import com.softfocus.server.api.model.Produto
+import com.softfocus.server.api.repository.CategoriaRepository
+import com.softfocus.server.api.repository.ProdutoRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
 import org.junit.jupiter.api.Order
@@ -75,9 +75,9 @@ internal class TesteDeCargaDeIntegracao {
 
 			val categoriasSalvas = categoriaRepository.findByNome(categoriaTestada.nome)
 
-			assertThat(!categoriasSalvas.isEmpty())
-			assertThat(categoriasSalvas.size).isEqualTo(1)
-			assertThat(categoriasSalvas[0].nome).isEqualTo(categoriaTestada.nome)
+			assertThat(!categoriasSalvas.any())
+			assertThat(categoriasSalvas.count()).isEqualTo(1)
+			assertThat(categoriasSalvas.first().nome).isEqualTo(categoriaTestada.nome)
 
 		}
 
@@ -90,13 +90,13 @@ internal class TesteDeCargaDeIntegracao {
 	fun testeDeCargaDeConsultaCategoriaViaAPI() {
 
 
-		val listaCategorias: List<Categoria> = categoriaRepository.findCategoriasTeste()
-		assertThat(!listaCategorias.isEmpty())
+		val listaCategorias = categoriaRepository.findCategoriasTeste()
+		assertThat(!listaCategorias.any())
 
 		//Pesquisa 10000 categorias aleatoriamente
 		for (i in 0 until 10000) {
 
-			val categoriaTestada: Categoria = listaCategorias.get(((listaCategorias.size - 1) * Math.random()).toInt())
+			val categoriaTestada: Categoria = listaCategorias.elementAt((((listaCategorias.count() - 1) * Math.random()).toInt()))
 
 			mockMvc.perform(get("/api/v1/categorias/" + categoriaTestada.codigo.toString())
 					.accept(MediaType.APPLICATION_JSON))
@@ -111,14 +111,13 @@ internal class TesteDeCargaDeIntegracao {
 	@Order(3)
 	@Throws(Exception::class)
 	fun testeDeCargaDeAlteracaoCategoriaViaAPI() {
-		var listaCategorias: List<Categoria>
+		var listaCategorias = categoriaRepository.findCategoriasTeste()
 
 		var categoriaTestada: Categoria
 
 		var categoriaRecuperada: Optional<Categoria>
 
-		listaCategorias = categoriaRepository.findCategoriasTeste()
-		assertThat(!listaCategorias.isEmpty())
+		assertThat(!listaCategorias.any())
 
 		//Testa alterando 30000 registros
 		for (i in 0 until 30000) {
@@ -130,7 +129,7 @@ internal class TesteDeCargaDeIntegracao {
 					.collect({ StringBuilder() }, { obj: StringBuilder, codePoint: Int -> obj.appendCodePoint(codePoint) }) { obj: StringBuilder, s: StringBuilder? -> obj.append(s) }
 					.toString())
 			assertThat(nomeAleatorio.length).isEqualTo(50)
-			categoriaTestada = listaCategorias.get(((listaCategorias.size - 1) * Math.random()).toInt())
+			categoriaTestada = listaCategorias.elementAt(((listaCategorias.count() - 1) * Math.random()).toInt())
 
 			categoriaTestada.nome = nomeAleatorio
 
@@ -155,11 +154,11 @@ internal class TesteDeCargaDeIntegracao {
 		var produtosSalvos: List<Produto>
 
 		val listaCategorias = categoriaRepository.findCategoriasTeste()
-		assertThat(!listaCategorias.isEmpty())
+		assertThat(!listaCategorias.any())
 
 
-		val listaProdutos: List<Produto> = produtoRepository.findProdutosTeste()
-		assertThat(!listaProdutos.isEmpty())
+		val listaProdutos = produtoRepository.findProdutosTeste()
+		assertThat(!listaProdutos.any())
 
 
 		//Testa inserindo 10000 registros
@@ -180,17 +179,17 @@ internal class TesteDeCargaDeIntegracao {
 			assertThat(descricaoAleatoria.length).isEqualTo(4000)
 			produtoTestado.nome = nomeAleatorio
 			produtoTestado.descricao = descricaoAleatoria
-			produtoTestado.categoria = listaCategorias.get(((listaCategorias.size - 1) * Math.random()).toInt())
+			produtoTestado.categoria = listaCategorias.elementAt(((listaCategorias.count() - 1) * Math.random()).toInt())
 			mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/produtos/adicionar-produto")
 					.contentType("application/json")
 					.content(objectMapper.writeValueAsString(produtoTestado)))
 					.andExpect(MockMvcResultMatchers.status().isOk)
-			produtosSalvos = produtoRepository.findByDescricao(descricaoAleatoria)
+			val produtosSalvos = produtoRepository.findByDescricao(descricaoAleatoria)
 
-			assertThat(!produtosSalvos.isEmpty())
-			assertThat(produtosSalvos[0].nome).isEqualTo(produtoTestado.nome)
-			assertThat(produtosSalvos[0].descricao).isEqualTo(produtoTestado.descricao)
-			assertThat(produtosSalvos[0].categoria).isEqualTo(produtoTestado.categoria)
+			assertThat(!produtosSalvos.any())
+			assertThat(produtosSalvos.first().nome).isEqualTo(produtoTestado.nome)
+			assertThat(produtosSalvos.first().descricao).isEqualTo(produtoTestado.descricao)
+			assertThat(produtosSalvos.first().categoria!!.codigo).isEqualTo(produtoTestado.categoria!!.codigo)
 
 		}
 
@@ -202,14 +201,14 @@ internal class TesteDeCargaDeIntegracao {
 	@Throws(Exception::class)
 	fun testeDeConsultaProdutoViaAPI() {
 		var produtoTestado: Produto
-		val listaProdutos: List<Produto> = produtoRepository.findProdutosTeste()
-		assertThat(!listaProdutos.isEmpty())
+		val listaProdutos = produtoRepository.findProdutosTeste()
+		assertThat(!listaProdutos.any())
 
 
 		//Pesquisa 10000 categorias aleatoriamente
 		for (i in 0 until 10000) {
 
-			produtoTestado = listaProdutos.get(((listaProdutos.size - 1) * Math.random()).toInt())
+			produtoTestado = listaProdutos.elementAt(((listaProdutos.count() - 1) * Math.random()).toInt())
 			mockMvc.perform(get("/api/v1/produtos/" + produtoTestado.codigo.toString())
 					.accept(MediaType.APPLICATION_JSON))
 					.andExpect(MockMvcResultMatchers.status().isOk)
@@ -227,11 +226,11 @@ internal class TesteDeCargaDeIntegracao {
 		var produtoTestado: Produto
 		var produtoRecuperado: Optional<Produto>
 
-		var listaProdutos: List<Produto> = produtoRepository.findProdutosTeste()
-		assertThat(!listaProdutos.isEmpty())
+		var listaProdutos = produtoRepository.findProdutosTeste()
+		assertThat(!listaProdutos.any())
 
 		val listaCategorias = categoriaRepository.findCategoriasTeste()
-		assertThat(!listaCategorias.isEmpty())
+		assertThat(!listaCategorias.any())
 
 
 		//Testa alterando 30000 registros
@@ -248,10 +247,10 @@ internal class TesteDeCargaDeIntegracao {
 					.toString())
 			assertThat(nomeAleatorio.length).isEqualTo(200)
 			assertThat(descricaoAleatoria.length).isEqualTo(4000)
-			produtoTestado = listaProdutos.get(((listaProdutos.size - 1) * Math.random()).toInt())
+			produtoTestado = listaProdutos.elementAt(((listaProdutos.count() - 1) * Math.random()).toInt())
 			produtoTestado.nome = nomeAleatorio
 			produtoTestado.descricao = descricaoAleatoria
-			produtoTestado.categoria = listaCategorias.get(((listaCategorias.size - 1) * Math.random()).toInt())
+			produtoTestado.categoria = listaCategorias.elementAt(((listaCategorias.count() - 1) * Math.random()).toInt())
 			mockMvc.perform(put("/api/v1/produtos/" + produtoTestado.codigo.toString())
 					.contentType("application/json")
 					.content(objectMapper.writeValueAsString(produtoTestado)))
@@ -260,7 +259,7 @@ internal class TesteDeCargaDeIntegracao {
 			assertThat(!produtoRecuperado.isEmpty)
 			assertThat(produtoRecuperado.get().nome).isEqualTo(produtoTestado.nome)
 			assertThat(produtoRecuperado.get().descricao).isEqualTo(produtoTestado.descricao)
-			assertThat(produtoRecuperado.get().categoria).isEqualTo(produtoTestado.categoria)
+			assertThat(produtoRecuperado.get().categoria!!.codigo).isEqualTo(produtoTestado.categoria!!.codigo)
 		}
 	}
 
@@ -268,10 +267,9 @@ internal class TesteDeCargaDeIntegracao {
 	@Order(7)
 	@Throws(Exception::class)
 	fun testeDeCargaDeExclusaoProdutoViaAPI() {
-		val listaProdutos: List<Produto>
+		val listaProdutos = produtoRepository.findProdutosTeste()
 		var produtoRecuperado: Optional<Produto?>
-		listaProdutos = produtoRepository.findProdutosTeste()
-		assertThat(!listaProdutos.isEmpty())
+		assertThat(!listaProdutos.any())
 		for (produto in listaProdutos) {
 			mockMvc.perform(delete("/api/v1/produtos/" + produto.codigo.toString())
 					.contentType("application/json")
@@ -286,10 +284,9 @@ internal class TesteDeCargaDeIntegracao {
 	@Order(8)
 	@Throws(Exception::class)
 	fun testeDeCargaDeExclusaoCategoriaViaAPI() {
-		val listaCategoria: List<Categoria>
+		val listaCategoria = categoriaRepository.findCategoriasTeste()
 		var categoriaRecuperada: Optional<Categoria?>
-		listaCategoria = categoriaRepository.findCategoriasTeste()
-		assertThat(!listaCategoria.isEmpty())
+		assertThat(!listaCategoria.any())
 		for (categoria in listaCategoria) {
 			mockMvc.perform(delete("/api/v1/categorias/" + categoria.codigo.toString())
 					.contentType("application/json")

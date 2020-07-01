@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CategoriaRepository : CrudRepository<Categoria, Int> {
-    fun findByNome(nome: String): List<Categoria>
-    fun findCategoriasTeste(): List<Categoria>
+    fun findByNome(nome: String): Iterable<Categoria>
+    fun findCategoriasTeste(): Iterable<Categoria>
 }
