@@ -59,7 +59,6 @@ var List = Vue.extend({
         filteredCategorias() {
             return this.categorias.filter((categoria) => {
                 return categoria.nome.indexOf(this.searchKey) > -1
-                        || categoria.categoria.toString().indexOf(this.searchKey) > -1
             }).sort((a,b) => (a.codigo > b.codigo) ? 1 : ((b.codigo > a.codigo) ? -1 : 0))
         }
     },
